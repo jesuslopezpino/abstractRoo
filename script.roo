@@ -1,0 +1,83 @@
+//project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule STANDARD
+//project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8 --multimodule BASIC
+project setup --topLevelPackage com.rindus.reservationDemo --projectName ReservationDemo --java 8
+
+//jpa setup --provider HIBERNATE --database HYPERSONIC_IN_MEMORY
+jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT 
+property add --key spring.jpa.properties.hibernate.hbm2ddl.auto --value update
+
+entity jpa --class ~.domain.Product
+entity jpa --class ~.domain.Customer
+entity jpa --class ~.domain.Stock
+//entity jpa --class ~.domain.PricePerProduct
+entity jpa --class ~.domain.CustomerOrder
+entity jpa --class ~.domain.Reservation
+entity jpa --class ~.domain.Sell
+
+focus --class ~.domain.Product
+field number --fieldName price --type java.lang.Long --notNull
+field string --fieldName name --notNull --unique --sizeMax 250
+field string	 --fieldName description --notNull --sizeMax 4000
+field list --fieldName productosStock --type ~.domain.Stock --cardinality ONE_TO_MANY --mappedBy producto
+//field list --fieldName preciosPorProducto --type ~.domain.PricePerProduct --cardinality ONE_TO_MANY --mappedBy producto
+
+focus --class ~.domain.Customer
+field string --fieldName email --notNull --unique 
+field string --fieldName name --notNull --sizeMax 250
+field string --fieldName surname1 --notNull --sizeMax 250
+field string --fieldName surname2 --sizeMax 250
+field date --fieldName birthDate --type java.util.Date --notNull --past --dateTimeFormatPattern dd/MM/yyyy
+field list --fieldName pedidos --type ~.domain.CustomerOrder --cardinality ONE_TO_MANY --mappedBy customer
+field list --fieldName reservas --type ~.domain.Reservation --cardinality ONE_TO_MANY --mappedBy customer
+
+focus --class ~.domain.Stock
+//field reference --fieldName producto --type ~.domain.Product --notNull
+field date --fieldName dateIn --type java.util.Date --dateTimeFormatPattern dd/MM/yyyy --notNull 
+field date --fieldName dateOut --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field list --fieldName reservas --type ~.domain.Reservation --cardinality ONE_TO_MANY --mappedBy stockItem
+field list --fieldName ventas --type ~.domain.Sell --cardinality ONE_TO_MANY --mappedBy stockItem
+//field list --fieldName preciosVenta --type ~.domain.PricePerProduct --cardinality ONE_TO_MANY --mappedBy stockItem
+
+//focus --class ~.domain.PricePerProduct
+//field reference --fieldName product --type ~.domain.Product --notNull
+//field number --fieldName price --type java.lang.Long --notNull --min 0
+//field date --fieldName startPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss" --notNull
+//field date --fieldName endPrice --type java.util.Date --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+
+focus --class ~.domain.CustomerOrder
+//field reference --fieldName customer --type ~.domain.Customer --notNull 
+field date --fieldName orderDate --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field list --fieldName sellList --type ~.domain.Sell --cardinality ONE_TO_MANY --mappedBy customerOrder
+
+focus --class ~.domain.Reservation
+//field reference --fieldName stockItem --type ~.domain.Stock --notNull 
+//field reference --fieldName customer --type ~.domain.Customer 
+field date --fieldName startReservation --type java.util.Date --notNull --dateTimeFormatPattern "dd/MM/yyyy hh:mm:ss"
+field date --fieldName expirationReservation --type java.util.Date --notNull 
+
+//focus --class ~.domain.Sell
+//field reference --fieldName stockItem --type ~.domain.Stock --notNull --cardinality MANY_TO_ONE
+//field reference --fieldName priceSell --type ~.domain.PricePerProduct --notNull --cardinality MANY_TO_ONE
+//field reference --fieldName customerOrder --type ~.domain.CustomerOrder --notNull 
+
+repository jpa --all
+service --all
+
+//test unit
+//test integration
+
+web mvc setup
+//web mvc controller --entity ~.domain.Product --responseType JSON
+//web mvc controller --entity ~.domain.Customer --responseType JSON
+//web mvc controller --entity ~.domain.Stock --responseType JSON
+//web mvc controller --entity ~.domain.PricePerProduct --responseType JSON
+//web mvc controller --entity ~.domain.CustomerOrder --responseType JSON
+//web mvc controller --entity ~.domain.Reservation --responseType JSON
+//web mvc controller --entity ~.domain.Sell --responseType JSON
+
+web mvc language --code en
+web mvc controller --all
+web mvc view setup --type THYMELEAF
+web mvc controller --all --responseType THYMELEAF
+web mvc finder --all --responseType THYMELEAF
+web mvc detail --all --responseType THYMELEAF
