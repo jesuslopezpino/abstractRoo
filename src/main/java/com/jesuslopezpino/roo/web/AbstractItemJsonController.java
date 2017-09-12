@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.util.UriComponents;
 import org.springframework.http.MediaType;
 import com.jesuslopezpino.roo.domain.AbstractEntity;
+import com.jesuslopezpino.roo.domain.QAbstractEntity;
 import com.jesuslopezpino.roo.repository.AbstractRepository;
 import com.jesuslopezpino.roo.service.EntityService;
 
@@ -27,7 +28,7 @@ import io.springlets.web.NotFoundException;
 @RestController
 // @RequestMapping(value = "/products/{product}", name =
 // "ProductsItemJsonController", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AbstractItemJsonController<Entity extends AbstractEntity, Service extends EntityService<Entity, AbstractRepository<Entity>>> {
+public class AbstractItemJsonController<Entity extends AbstractEntity, Service extends EntityService<Entity, AbstractRepository<Entity, QAbstractEntity>>> {
 
 	private Service service;
 
