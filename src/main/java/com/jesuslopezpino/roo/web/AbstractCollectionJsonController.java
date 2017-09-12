@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.util.UriComponents;
 
 import com.jesuslopezpino.roo.domain.AbstractEntity;
+import com.jesuslopezpino.roo.repository.AbstractRepository;
 import com.jesuslopezpino.roo.service.EntityService;
 
 import io.springlets.data.domain.GlobalSearch;
@@ -35,7 +36,7 @@ import org.springframework.http.MediaType;
 // @RequestMapping(value = "/products", name =
 // "ProductsCollectionJsonController", produces =
 // MediaType.APPLICATION_JSON_VALUE)
-public abstract class AbstractCollectionJsonController<Entity extends AbstractEntity, Service extends EntityService<Entity>> {
+public abstract class AbstractCollectionJsonController<Entity extends AbstractEntity, Service extends EntityService<Entity, AbstractRepository<Entity>>> {
 
 	private Service entityService;
 

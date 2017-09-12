@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.jesuslopezpino.roo.repository.AbstractRepository;
+
 import io.springlets.data.domain.GlobalSearch;
 import io.springlets.format.EntityResolver;
 
-public abstract interface EntityService<Entity> extends EntityResolver<Entity, Long> {
+public abstract interface EntityService<Entity, Repository extends AbstractRepository<Entity>> extends EntityResolver<Entity, Long> {
 
 /**
  * TODO Auto-generated method documentation
