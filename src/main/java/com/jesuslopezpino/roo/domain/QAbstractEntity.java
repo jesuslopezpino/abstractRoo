@@ -16,7 +16,7 @@ import com.querydsl.core.types.Path;
 /**
  * QProduct is a Querydsl query type for Product
  */
-@Generated("com.querydsl.codegen.EntitySerializer")
+//@Generated("com.querydsl.codegen.EntitySerializer")
 public class QAbstractEntity extends EntityPathBase<AbstractEntity> {
 
 	private static final long serialVersionUID = 37131226L;
