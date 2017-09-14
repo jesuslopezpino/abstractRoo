@@ -76,7 +76,7 @@ implements AbstractRepository<Entity, QEntity> {
 
 	@Override
 	public Page<Entity> findAllByIdsIn(List<Long> ids, GlobalSearch globalSearch, Pageable pageable) {
-		QEntity product = (QEntity) QEntity.product;
+		QEntity product = (QEntity) QEntity.entity;
 
 		JPQLQuery<Entity> query = from(product);
 
@@ -124,7 +124,7 @@ implements AbstractRepository<Entity, QEntity> {
 
 	@Override
 	public Page<Entity> findAll(GlobalSearch globalSearch, Pageable pageable) {
-		QEntity product = (QEntity) QEntity.product;
+		QEntity product = (QEntity) QEntity.entity;
 
 		JPQLQuery<Entity> query = from(product);
 

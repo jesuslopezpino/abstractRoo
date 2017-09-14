@@ -21,7 +21,7 @@ public class QAbstractEntity extends EntityPathBase<AbstractEntity> {
 
 	private static final long serialVersionUID = 37131226L;
 
-	public static final QAbstractEntity product = new QAbstractEntity("product");
+	public static final QAbstractEntity entity = new QAbstractEntity("entity");
 
 	public final StringPath description = createString("description");
 
