@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.jesuslopezpino.roo.domain.AbstractEntity;
 import com.jesuslopezpino.roo.domain.QAbstractEntity;
 import com.jesuslopezpino.roo.repository.AbstractRepository;
 
 import io.springlets.data.domain.GlobalSearch;
 import io.springlets.format.EntityResolver;
 
-public abstract interface EntityService<Entity, Repository extends AbstractRepository<Entity, QAbstractEntity>>
+public abstract interface EntityService<Entity extends AbstractEntity, Repository extends AbstractRepository<Entity, QAbstractEntity>>
 		extends EntityResolver<Entity, Long> {
 
 	/**

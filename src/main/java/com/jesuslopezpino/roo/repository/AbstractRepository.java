@@ -14,7 +14,7 @@ import io.springlets.data.domain.GlobalSearch;
 //import com.rindus.reservationdemo.repository.ProductRepositoryCustom;
 
 //@RooJpaRepositoryCustomImpl(repository = ProductRepositoryCustom.class)
-public interface AbstractRepository<Entity, QEntity extends QAbstractEntity> {
+public interface AbstractRepository<Entity extends AbstractEntity, QEntity extends QAbstractEntity> {
 
 	void delete(Entity entity);
 

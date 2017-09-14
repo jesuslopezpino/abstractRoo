@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jesuslopezpino.roo.domain.AbstractEntity;
 import com.jesuslopezpino.roo.domain.QAbstractEntity;
 import com.jesuslopezpino.roo.repository.AbstractRepository;
 
@@ -24,7 +25,7 @@ import io.springlets.data.domain.GlobalSearch;
 
 @Service
 @Transactional(readOnly = true)
-public abstract class EntityServiceImpl<Entity, Repository extends AbstractRepository<Entity, QAbstractEntity>>
+public abstract class EntityServiceImpl<Entity extends AbstractEntity, Repository extends AbstractRepository<Entity, QAbstractEntity>>
 		implements EntityService<Entity, Repository> {
 
 	/**
